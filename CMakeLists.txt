@@ -20,8 +20,8 @@ target_link_libraries(helloworld_cli PRIVATE
     helloworld
 )
 
-if(WITH_BOOST_TEST)
-    find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+if(WITH_GOOGLE_TEST)
+    add_subdirectory(googletest)
     add_executable(test_version test_version.cpp)
 
     set_target_properties(test_version PROPERTIES
@@ -29,13 +29,8 @@ if(WITH_BOOST_TEST)
         CXX_STANDARD_REQUIRED ON
     )
 
-    set_target_properties(test_version PROPERTIES
-        COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
-        INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
-    )
-
     target_link_libraries(test_version
-        ${Boost_LIBRARIES}
+        GTest::gtest_main
         helloworld
     )
 endif()
@@ -79,7 +74,7 @@ set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 set(CPACK_PACKAGE_CONTACT example@example.com)
 include(CPack)
 
-if(WITH_BOOST_TEST)
+if(WITH_GOOGLE_TEST)
     enable_testing()
     add_test(test_version test_version)
 endif()
