@@ -5,6 +5,9 @@ on:
     branches:
       - main
       - feature/github_actions
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
