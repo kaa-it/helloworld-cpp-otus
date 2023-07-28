@@ -21,7 +21,7 @@ target_link_libraries(helloworld_cli PRIVATE
 )
 
 if(WITH_GOOGLE_TEST)
-    add_subdirectory(googletest)
+    add_subdirectory(googletest EXCLUDE_FROM_ALL)
     add_executable(test_version test_version.cpp)
 
     set_target_properties(test_version PROPERTIES
